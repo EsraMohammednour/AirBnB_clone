@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
             instance1 = BaseModel()
             instance1.save()
             print(instance1.id)
-        def do_show(self, arg):
+    def do_show(self, arg):
             command = shlex.split(arg)
             if len(command) == 0:
                 print("** class name missing **")
@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
                     print(obje[key])
                 else:
                     print("** no instance found **")
-        def do_destroy(self, arg):
+    def do_destroy(self, arg):
             command = shlex.split(arg)
             if len(command) == 0:
                 print("** class name missing **")
