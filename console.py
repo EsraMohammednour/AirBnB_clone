@@ -29,36 +29,40 @@ class HBNBCommand(cmd.Cmd):
             instance1.save()
             print(instance1.id)
     def do_show(self, arg):
-            command = shlex.split(arg)
-            if len(command) == 0:
-                print("** class name missing **")
-            elif command[0] not in self.val_classes:
-                print("** class doesn't exist **")
-            elif len(command) < 2:
-                print("** instance id missing **")
+        """Prints the string representation of an instance based on the class name and id
+        """
+        command = shlex.split(arg)
+        if len(command) == 0:
+            print("** class name missing **")
+        elif command[0] not in self.val_classes:
+            print("** class doesn't exist **")
+        elif len(command) < 2:
+            print("** instance id missing **")
+        else:
+            obje = storage.all()
+            key = f"{commad[0]}.{commad[1]}"
+            if key in obje:
+                print(obje[key])
             else:
-                obje = storage.all()
-                key = f"{commad[0]}.{commad[1]}"
-                if key in obje:
-                    print(obje[key])
-                else:
-                    print("** no instance found **")
+                print("** no instance found **")
     def do_destroy(self, arg):
-            command = shlex.split(arg)
-            if len(command) == 0:
-                print("** class name missing **")
-            elif command[0] not in self.val_classes:
-                print("** class doesn't exist **")
-            elif len(command) < 2:
-                print("** instance id missing **")
+        """Deletes an instance based on the class name and id
+        """
+        command = shlex.split(arg)
+        if len(command) == 0:
+            print("** class name missing **")
+        elif command[0] not in self.val_classes:
+            print("** class doesn't exist **")
+        elif len(command) < 2:
+            print("** instance id missing **")
+        else:
+            obje = storage.all()
+            key = f"{commad[0]}.{commad[1]}"
+            if key in obje:
+                del obje[key]
+                storage.save()
             else:
-                obje = storage.all()
-                key = f"{commad[0]}.{commad[1]}"
-                if key in obje:
-                    del obje[key]
-                    storage.save()
-                else:
-                    print("** no instance found **")
+                print("** no instance found **")
 
 
     def do_EOF(self, arg):
